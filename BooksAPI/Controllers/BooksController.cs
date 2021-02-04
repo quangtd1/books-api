@@ -22,7 +22,7 @@ namespace BooksAPI.Controllers
         public IEnumerable<BookDto> GetAllBooks() => _repository.GetAllBooks();
 
         [HttpGet("{id}")]
-        public ActionResult<BookDto> GetBook(Guid id) => _repository.GetBookById(id);
+        public BookDto GetBook(Guid id) => _repository.GetBookById(id);
 
         [HttpPost]
         public BookDto CreateBook(AddBookRequest request) => _repository.AddBook(request);
