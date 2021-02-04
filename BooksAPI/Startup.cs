@@ -1,5 +1,7 @@
 using System;
+using AutoMapper;
 using BooksAPI.BusinessLogic;
+using BooksAPI.BusinessLogic.Exceptions;
 using BooksAPI.BusinessLogic.Interface;
 using BooksAPI.Model.Context;
 using BooksAPI.Model.Repository;
@@ -25,9 +27,16 @@ namespace BooksAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BooksAPIDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("BookAPIConnection")));
+
             services.AddControllers();
+
             services.AddScoped<IBooksRepository, BooksBusinessLogic>();
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddScoped(typeof(IThroughException<>), typeof(ThroughException<>));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }
 

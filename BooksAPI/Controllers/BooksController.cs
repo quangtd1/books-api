@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using BooksAPI.BusinessLogic.Interface;
-using BooksAPI.Model.Models;
+using BooksAPI.Model.Dtos;
+using BooksAPI.Model.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksAPI.Controllers
 {
     [Route("api/books")]
+    [ApiController]
     public class BooksController : ControllerBase
     {
         private readonly IBooksRepository _repository;
@@ -17,9 +19,18 @@ namespace BooksAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Book> GetAllBooks() => _repository.GetAllBooks();
+        public IEnumerable<BookDto> GetAllBooks() => _repository.GetAllBooks();
 
         [HttpGet("{id}")]
-        public Book GetBook(Guid id) => _repository.GetBookById(id);
+        public ActionResult<BookDto> GetBook(Guid id) => _repository.GetBookById(id);
+
+        [HttpPost]
+        public BookDto CreateBook(AddBookRequest request) => _repository.AddBook(request);
+
+        [HttpPut("{id}")]
+        public BookDto UpdateBook(Guid id, UpdateBookRequest request) => _repository.UpdateBook(id, request);
+
+        [HttpDelete("{id}")]
+        public void DeleteBook(Guid id) => _repository.DeteleBook(id);
     }
 }

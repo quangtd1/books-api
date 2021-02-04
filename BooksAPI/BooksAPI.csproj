@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BooksAPI.BusinessLogic\BooksAPI.BusinessLogic.csproj" />
-    <ProjectReference Include="..\BooksAPI.Data\BooksAPI.Model.csproj" />
+    <ProjectReference Include="..\BooksAPI.Model\BooksAPI.Model.csproj" />
   </ItemGroup>
 
 

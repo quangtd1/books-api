@@ -1,11 +1,16 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
-namespace BooksAPI.Model.Models
+namespace BooksAPI.Model.Requests
 {
-    public class Book : BaseModel
+    public class UpdateBookRequest : BaseRequest
     {
+        [Required]
+        [MaxLength(100)]
+        public string Name { get; set; }
+
         [Required]
         public string Description { get; set; }
 
@@ -14,10 +19,6 @@ namespace BooksAPI.Model.Models
 
         [Required]
         public int Year { get; set; }
-
-
-        [ForeignKey(nameof(AuthorId))]
-        public Author Author { get; set; }
 
         [Required]
         public Guid AuthorId { get; set; }

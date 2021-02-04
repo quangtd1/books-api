@@ -15,5 +15,9 @@ namespace BooksAPI.Model.Repository
         void Delete(T entity);
 
         bool Exists(Guid id);
+
+        void SaveAll();
+
+        void Update(T entity);
     }
 }

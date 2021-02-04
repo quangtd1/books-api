@@ -40,5 +40,14 @@ namespace BooksAPI.Model.Repository
         {
             return _context.Set<T>().Find(id);
         }
+
+        public void SaveAll()
+        {
+            _context.SaveChanges();
+        }
+
+        public void Update(T entity)
+        {
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using BooksAPI.Model.Models;
-using BooksAPI.Model.Request;
+﻿using BooksAPI.Model.Dtos;
+using BooksAPI.Model.Requests;
 using System;
 using System.Collections.Generic;
 
@@ -7,10 +7,14 @@ namespace BooksAPI.BusinessLogic.Interface
 {
     public interface IBooksRepository
     {
-        IEnumerable<Book> GetAllBooks();
+        IEnumerable<BookDto> GetAllBooks();
 
-        Book GetBookById(Guid id);
+        BookDto GetBookById(Guid id);
 
-        IEnumerable<Book> AddBook(AddBookRequest request);
+        BookDto AddBook(AddBookRequest request);
+
+        BookDto UpdateBook(Guid id, UpdateBookRequest request);
+
+        void DeteleBook(Guid id);
     }
 }

@@ -1,29 +1,90 @@
-﻿using BooksAPI.BusinessLogic.Interface;
+﻿using AutoMapper;
+using BooksAPI.BusinessLogic.Interface;
+using BooksAPI.Model.Dtos;
 using BooksAPI.Model.Models;
 using BooksAPI.Model.Repository;
-using BooksAPI.Model.Request;
+using BooksAPI.Model.Requests;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BooksAPI.BusinessLogic
 {
     public class BooksBusinessLogic : IBooksRepository
     {
-        private readonly IRepository<Book> _repository;
+        private readonly IRepository<Book> _repositoryBook;
+        private readonly IRepository<Author> _repositoryAuthor;
+        private readonly IMapper _mapper;
+        private readonly IThroughException<Book> _exceptionBook;
+        private readonly IThroughException<Author> _exceptionAuthor;
 
-        public BooksBusinessLogic(IRepository<Book> repository)
+        private readonly string Author = "Author";
+        private readonly string Book = "Book";
+
+        public BooksBusinessLogic
+            (
+            IRepository<Book> repositoryBook,
+            IRepository<Author> repositoryAuthor,
+            IMapper mapper,
+            IThroughException<Book> exceptionBook,
+            IThroughException<Author> exceptionAuthor
+            )
         {
-            _repository = repository;
+            _repositoryBook = repositoryBook;
+            _repositoryAuthor = repositoryAuthor;
+            _mapper = mapper;
+            _exceptionBook = exceptionBook;
+            _exceptionAuthor = exceptionAuthor;
         }
 
-        public IEnumerable<Book> AddBook(AddBookRequest request)
+        public BookDto AddBook(AddBookRequest request)
         {
-            throw new NotImplementedException();
+            var author = _repositoryAuthor.GetById(request.AuthorId);
+            _exceptionAuthor.CheckExistItem(Author, author);
+
+            var bookModel = _mapper.Map<Book>(request);
+
+            _repositoryBook.Add(bookModel);
+
+            return _mapper.Map<BookDto>(bookModel);
         }
 
-        public IEnumerable<Book> GetAllBooks() => _repository.GetAll();
+        public void DeteleBook(Guid id)
+        {
+            var book = _repositoryBook.GetById(id);
 
-        public Book GetBookById(Guid id) => _repository.GetById(id);
+            _exceptionBook.CheckExistItem(Book, book);
+            _repositoryBook.Delete(book);
+        }
+
+        public IEnumerable<BookDto> GetAllBooks()
+        {
+            var books = _repositoryBook.GetAll();
+
+            return _mapper.Map<IEnumerable<BookDto>>(books);
+        }
+
+        public BookDto GetBookById(Guid id)
+        {
+            var book = _repositoryBook.GetById(id);
+            _exceptionBook.CheckExistItem(Book, book);
+
+            return _mapper.Map<BookDto>(book);
+        }
+
+        public BookDto UpdateBook(Guid id, UpdateBookRequest request)
+        {
+            var author = _repositoryAuthor.GetById(request.AuthorId);
+            _exceptionAuthor.CheckExistItem(Author, author);
+
+            var book = _repositoryBook.GetById(id);
+
+            _exceptionBook.CheckExistItem(Book, book);
+
+            _mapper.Map(request, book);
+            _repositoryBook.Update(book);
+            _repositoryBook.SaveAll();
+
+            return _mapper.Map<BookDto>(book);
+        }
     }
 }
