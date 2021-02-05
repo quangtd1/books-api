@@ -2,6 +2,7 @@
 using BooksAPI.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BooksAPI.Model.Repository
 {
@@ -31,14 +32,14 @@ namespace BooksAPI.Model.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return _context.Set<T>();
+            return await Task.FromResult(_context.Set<T>());
         }
 
-        public T GetById(Guid id)
+        public async Task<T> GetById(Guid id)
         {
-            return _context.Set<T>().Find(id);
+            return await Task.FromResult(_context.Set<T>().Find(id));
         }
 
         public void SaveAll()

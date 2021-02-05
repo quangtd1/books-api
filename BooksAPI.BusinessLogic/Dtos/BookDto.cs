@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BooksAPI.Model.Dtos
+namespace BooksAPI.BusinessLogic.Dtos
 {
     public class BookDto: BaseDto
     {

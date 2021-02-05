@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using BooksAPI.BusinessLogic.Dtos;
 using BooksAPI.BusinessLogic.Interface;
-using BooksAPI.Model.Dtos;
-using BooksAPI.Model.Requests;
+using BooksAPI.BusinessLogic.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksAPI.Controllers

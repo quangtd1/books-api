@@ -34,7 +34,7 @@ namespace BooksAPI
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddScoped(typeof(IThroughException<>), typeof(ThroughException<>));
+            services.AddScoped(typeof(IThroughException<>), typeof(Exception<>));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

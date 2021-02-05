@@ -1,19 +1,20 @@
-﻿using BooksAPI.Model.Dtos;
-using BooksAPI.Model.Requests;
+﻿using BooksAPI.BusinessLogic.Dtos;
+using BooksAPI.BusinessLogic.Requests;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BooksAPI.BusinessLogic.Interface
 {
     public interface IBooksRepository
     {
-        IEnumerable<BookDto> GetAllBooks();
+        Task<IEnumerable<BookDto>> GetAllBooks();
 
-        BookDto GetBookById(Guid id);
+        Task<BookDto> GetBookById(Guid id);
 
-        BookDto AddBook(AddBookRequest request);
+        Task<BookDto> AddBook(AddBookRequest request);
 
-        BookDto UpdateBook(Guid id, UpdateBookRequest request);
+        Task<BookDto> UpdateBook(Guid id, UpdateBookRequest request);
 
         void DeteleBook(Guid id);
     }

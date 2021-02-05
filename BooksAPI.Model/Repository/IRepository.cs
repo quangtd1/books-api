@@ -1,14 +1,15 @@
 ﻿using BooksAPI.Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BooksAPI.Model.Repository
 {
     public interface IRepository<T> where T : BaseModel
     {
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
-        T GetById(Guid id);
+        Task<T> GetById(Guid id);
 
         void Add(T entity);
 

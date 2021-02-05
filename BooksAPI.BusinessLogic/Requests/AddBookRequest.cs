@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace BooksAPI.Model.Requests
+namespace BooksAPI.BusinessLogic.Requests
 {
     public class AddBookRequest : BaseRequest
     {

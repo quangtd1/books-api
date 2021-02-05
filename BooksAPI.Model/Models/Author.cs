@@ -14,6 +14,5 @@ namespace BooksAPI.Model.Models
         public string Website { get; set; }
 
         public ICollection<Book> Books { get; set; }
-            = new List<Book>();
     }
 }
