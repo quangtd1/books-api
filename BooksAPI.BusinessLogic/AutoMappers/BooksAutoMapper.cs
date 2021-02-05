@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using BooksAPI.Model.Dtos;
+using BooksAPI.BusinessLogic.Dtos;
+using BooksAPI.BusinessLogic.Requests;
 using BooksAPI.Model.Models;
-using BooksAPI.Model.Requests;
 
 namespace BooksAPI.BusinessLogic.AutoMappers
 {

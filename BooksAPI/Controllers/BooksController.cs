@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BooksAPI.BusinessLogic.Dtos;
 using BooksAPI.BusinessLogic.Interface;
 using BooksAPI.BusinessLogic.Requests;
@@ -19,16 +20,16 @@ namespace BooksAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<BookDto> GetAllBooks() => _repository.GetAllBooks();
+        public Task<IEnumerable<BookDto>> GetAllBooks() => _repository.GetAllBooks();
 
         [HttpGet("{id}")]
-        public BookDto GetBook(Guid id) => _repository.GetBookById(id);
+        public Task<BookDto> GetBook(Guid id) => _repository.GetBookById(id);
 
         [HttpPost]
-        public BookDto CreateBook(AddBookRequest request) => _repository.AddBook(request);
+        public Task<BookDto> CreateBook(AddBookRequest request) => _repository.AddBook(request);
 
         [HttpPut("{id}")]
-        public BookDto UpdateBook(Guid id, UpdateBookRequest request) => _repository.UpdateBook(id, request);
+        public Task<BookDto> UpdateBook(Guid id, UpdateBookRequest request) => _repository.UpdateBook(id, request);
 
         [HttpDelete("{id}")]
         public void DeleteBook(Guid id) => _repository.DeteleBook(id);
